@@ -6,7 +6,7 @@ import {SET_TC, TOGGLE_OPEN} from "../../utils/types";
 export const AppState = ({children}) => {
     const initialState = {
         user: {
-            name: 'Olga Alexeeva',
+            name: 'OlgA Alexeeva',
             age: '18',
             city: '1',
             sex: 'female',
