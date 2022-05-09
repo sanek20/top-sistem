@@ -1,0 +1,13 @@
+.wrapper {
+}
+.list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+
+}
+.listItem {
+  flex: 1;
+  max-width: 50%;
+}

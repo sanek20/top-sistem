@@ -1,0 +1,116 @@
+.wrapper {
+  width: 100%;
+  height: 100%;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 21px;
+  line-height: 26px;
+  color: #000000;
+}
+
+.formWrap {
+  display: flex;
+  flex-direction: column;
+  margin-top: 36px;
+}
+
+.formItem {
+  width: 100%;
+  position: relative;
+  margin-bottom: 15px;
+
+  label {
+    z-index: 20;
+    display: block;
+    position: absolute;
+    top: 7px;
+    left: 22px;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    color: #525252;
+  }
+}
+
+.error {
+  border: 2px solid #e5465c;
+}
+
+.errMsg {
+  margin-left: 22px;
+  margin-top: 3px;
+  font-size: 10px;
+  font-weight: 500;
+  color: #e5465c;
+}
+
+.input, input, select {
+  width: 100%;
+  max-width: 100%;
+  height: 54px;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  background-color: #fff;
+  color: #000000;
+  border: 0.5px solid #CCCCCC;
+  border-radius: 14px;
+  box-sizing: border-box;
+  padding-left: 22px;
+  padding-top: 10px;
+  &:disabled {
+    background-color: #C4C4C4;
+  }
+}
+
+select {
+  padding-right: 22px;
+  //Remove native arrow
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  &:after {
+    content: '';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    background-color: #2BCE31;
+  }
+}
+
+.btn {
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+  height: 54px;
+  background: linear-gradient(92.23deg, #7DE481 9.24%, #46CD4B 95.15%);
+  border-radius: 14px;
+  border: none;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: #FFFFFF;
+  text-align: center;
+  transition: all 1000ms ease-in-out;
+  &:hover {
+    background: linear-gradient(92.23deg, #7DE481 9.24%, #46CD4B 36.92%, #8CE790 95.15%);
+  }
+  &:active {
+    background: linear-gradient(92.23deg, #4FCB54 9.24%, #46CD4B 36.92%, #2BCE31 95.15%);
+    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.25);
+  }
+  &:disabled {
+    background: linear-gradient(92.23deg, #B0BFB1 9.24%, #BBCBBC 36.92%, #B6C5B6 95.15%);
+  }
+}
