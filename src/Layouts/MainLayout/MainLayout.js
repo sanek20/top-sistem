@@ -3,9 +3,9 @@ import styles from './MainLayout.module.scss'
 import {ModalContext} from "../../Context/ModalContext/ModalContext";
 import {Modal} from "../../Containers/Modal";
 import {QRRender} from "../../Components/QRRender/QRRender";
-import {CSSTransition} from "react-transition-group";
 import {AppContext} from "../../Context/AppContext/AppContext";
 import {cardFormatter} from "../../utils/cardFormatter";
+import {CSSTransition} from "react-transition-group";
 
 export const MainLayout = ({children}) => {
     const modalState = useContext(ModalContext)
