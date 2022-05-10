@@ -3,9 +3,11 @@ import cls from './QRButton.module.scss'
 import {set} from "react-hook-form";
 import {QRCodeIcon} from "../UI/QRCodeIcon/QRCodeIcon";
 import {ModalContext} from "../../Context/ModalContext/ModalContext";
+import {AppContext} from "../../Context/AppContext/AppContext";
 
 const QRButton = () => {
     const {toggleOpen} = useContext(ModalContext)
+    const {status} = useContext(AppContext)
 
     return (
         <button
@@ -16,7 +18,7 @@ const QRButton = () => {
                 <QRCodeIcon size={20}/>
             </div>
             <div className={cls.text}>
-                Показать QR-код
+                {status === 'manager' ? "Сканировать QR-код" : "Показать QR-код"}
             </div>
         </button>
     )

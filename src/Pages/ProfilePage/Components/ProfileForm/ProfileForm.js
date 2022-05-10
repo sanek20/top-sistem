@@ -24,7 +24,7 @@ const ProfileForm = () => {
     const handleForm = async (data) => {
         setLoading(true)
         await console.log(data)
-        await setTimeout(() => {
+        setTimeout(() => {
             setLoading(false)
         }, 3000)
         clearTimeout()

@@ -1,3 +1,5 @@
+// noinspection JSCheckFunctionSignatures
+
 import React, {useReducer} from "react";
 import {ModalContext} from "./ModalContext";
 import {modalReducer} from "./ModalReducer";

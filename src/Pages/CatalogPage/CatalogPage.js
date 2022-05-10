@@ -6,6 +6,7 @@ import {LayoutContent} from "../../Layouts/LayoutContent";
 import {CatalogList} from "./Components/CatalogList/CatalogList";
 
 const CatalogPage = () => {
+
     return (
         <div className={cls.catalogPage}>
             <HeaderProfilePage avatar={false} />

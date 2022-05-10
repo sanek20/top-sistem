@@ -4,7 +4,7 @@ import {SelectCity} from "../SelectCity/SelectCity";
 import {CatalogListItem} from "../CatalogListItem/CatalogListItem";
 import {catalogList} from "../../../../data/data";
 
-const CatalogList = () => {
+const CatalogList = ({chosenTc, chosenCity}) => {
     const [selectCity, setSelectCity] = useState(1)
 
     return (

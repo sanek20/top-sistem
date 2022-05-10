@@ -6,8 +6,9 @@ import {BonusCard} from "../../Components/BonusCard";
 import {LayoutContainer} from "../../Layouts/LayoutContainer/LayoutContainer";
 import {Logo} from "../../Components/BonusCard/Logo";
 import {useBackground} from "./hook/useBackground";
+import {CashbackDisplay} from "./Components/CashbackDisplay";
 
-const HeaderMain = () => {
+const HeaderMainManager = () => {
     const {background} = useBackground()
 
     return (
@@ -21,12 +22,12 @@ const HeaderMain = () => {
                 </div>
                 <ProfileDisplay type={'full'}/>
                 <div className={cls.secondRow}>
-                    <QRButton managerStatus={true}/>
-                    <BonusCard/>
+                    <QRButton/>
+                    <CashbackDisplay />
                 </div>
             </LayoutContainer>
         </div>
     )
 }
 
-export {HeaderMain}
+export {HeaderMainManager}

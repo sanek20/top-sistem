@@ -5,6 +5,7 @@ import silverBg from '../img/bgSilver.png'
 import goldBg from '../img/bgGold.png'
 import platinumBg from '../img/bgPlatinum.png'
 import vipBg from '../img/bgVip.png'
+import managerBg from '../img/managerBg.png'
 
 export const mockData = {
     cardNumber: '1267 3249 0453 9970',
@@ -187,4 +188,5 @@ export const backgrounds = [
     {status: 'gold', asset: goldBg},
     {status: 'platinum', asset: platinumBg},
     {status: 'vip', asset: vipBg},
+    {status: 'manager', asset: managerBg}
 ]
