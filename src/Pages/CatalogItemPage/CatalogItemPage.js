@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useMemo, useState} from 'react';
 import cls from "../CatalogPage/CatalogPage.module.scss";
 import {HeaderProfilePage} from "../ProfilePage/Components/HeaderProfilePage";
 import {LayoutContent} from "../../Layouts/LayoutContent";
@@ -12,10 +12,18 @@ import {ModalContext} from "../../Context/ModalContext/ModalContext";
 const CatalogItemPage = () => {
     let {id: itemId} = useParams()
     const modalState = useContext(ModalContext)
+    const [data, setData] = useState({})
 
-    console.log(modalState)
+    useEffect(() => {
+        return () => {
+            setData(catalogList.find(i => i.id === itemId))
+        };
+    }, []);
 
-    const data = catalogList.find(i => i.id === itemId)
+
+    // useMemo(() => setData(catalogList.find(i => i.id === itemId)), data);
+
+    console.log(data)
 
     return (
         <div className={cls.catalogPage}>
