@@ -7,8 +7,8 @@ import {SET_AUTH} from "../../utils/types";
 
 export const AuthState = ({children}) => {
     const initialState = {
-        auth: true,
-        role: 'manager',
+        auth: false,
+        role: '',
         isManager: true,
     };
     const [state, dispatch] = useReducer(authReducer, initialState)
