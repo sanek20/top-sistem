@@ -18,9 +18,13 @@ const FooterPanelUI = (props) => {
 
     const [isManager, setIsManager] = useState(false)
 
-    useEffect(() => {
+    const setStateIsManager = () => {
         if (role === 'manager') setIsManager(true)
-    }, role)
+    }
+
+    useEffect(() => {
+        setStateIsManager()
+    }, [role])
     
     return (
         <div className={cls.wrapper}>
