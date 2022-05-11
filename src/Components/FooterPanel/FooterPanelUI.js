@@ -1,18 +1,27 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import cls from './FooterPanel.module.scss'
 import {QRCodeIcon} from "../UI/QRCodeIcon/QRCodeIcon";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {ModalContext} from "../../Context/ModalContext/ModalContext";
+import {useBackground} from "../../Containers/HeaderMain/hook/useBackground";
+import {AppContext} from "../../Context/AppContext/AppContext";
+import {AuthContext} from "../../Context/AuthContext/AuthContext";
 
 
 const FooterPanelUI = (props) => {
-    const { activeState,
-        activeIcon,
-        notActiveIcon,
-        count } = props
-
+    const { activeState, activeIcon, notActiveIcon } = props
     const modalState = useContext(ModalContext)
+    const {card} = useContext(AppContext)
+    const {role} = useContext(AuthContext)
+    const {gradient} = useBackground()
+    const navigate = useNavigate();
 
+    const [isManager, setIsManager] = useState(false)
+
+    useEffect(() => {
+        if (role === 'manager') setIsManager(true)
+    }, role)
+    
     return (
         <div className={cls.wrapper}>
             <div className={cls.rightSide}>
@@ -49,13 +58,18 @@ const FooterPanelUI = (props) => {
             </div>
             <div
                 className={cls.center}
-                onClick={() => modalState.toggleOpen()}
+                onClick={() => isManager ? navigate("/scan", {replace: true})  : modalState.toggleOpen()}
             >
-                <div className={cls.qrWrapper}>
+                <div
+                    className={cls.qrWrapper}
+                    style={{background: gradient}}
+                >
                     <div className={cls.qrIcon}>
                         <QRCodeIcon size={40}/>
                     </div>
-                    <div className={cls.count}>{count}</div>
+                    {!isManager
+                    ? <div className={cls.count}>{card.bonusAmount}</div>
+                    : <div className={cls.countManager}>сканировать</div>}
                 </div>
             </div>
             <div className={cls.leftSide}>

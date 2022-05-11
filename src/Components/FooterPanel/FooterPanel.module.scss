@@ -36,8 +36,8 @@ a {
   width: 96px;
   height: 96px;
   border-radius: 50%;
-  background: linear-gradient(139.07deg, #E3C559 15.05%, #C08F0F 54.46%, #E5BE30 92.26%);
-  border: 2px solid #C08F0F;
+  //background: linear-gradient(139.07deg, #E3C559 15.05%, #C08F0F 54.46%, #E5BE30 92.26%);
+  border: 2px solid rgba(255, 255, 255, 0.58);
 
   display: flex;
   justify-content: center;
@@ -52,14 +52,21 @@ a {
   margin-bottom: 5px;
 }
 
-.count {
+.count, .countManager {
   text-align: center;
-  font-weight: 700;
-  font-size: 14px;
   line-height: 100%;
   color: #FFFFFF;
 }
 
+.count {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.countManager {
+  font-size: 9px;
+  font-weight: 400;
+}
 
 //Menu Item
 
@@ -87,7 +94,7 @@ a {
 }
 
 @media (max-width: 340px) {
-  .rightSide, .leftSide  {
+  .rightSide, .leftSide {
     gap: 14px;
   }
 }

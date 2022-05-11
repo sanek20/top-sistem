@@ -2,7 +2,7 @@ import {TOGGLE_OPEN} from "../../utils/types";
 
 const handlers = {
     DEFAULT: state => state,
-    TOGGLE_OPEN: state => ({...state, open: !state.open}),
+    [TOGGLE_OPEN]: state => ({...state, open: !state.open}),
 
 }
 

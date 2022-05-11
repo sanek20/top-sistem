@@ -1,7 +1,9 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import cls from '../../ProfilePage/Components/ProfileForm/ProfileForm.module.scss'
 import {useForm} from "react-hook-form";
 import {TiWarning} from "react-icons/ti";
+import {AuthContext} from "../../../Context/AuthContext/AuthContext";
+import {AppContext} from "../../../Context/AppContext/AppContext";
 
 const AuthForm = () => {
     const {
@@ -9,16 +11,20 @@ const AuthForm = () => {
         formState: {errors},
         handleSubmit,
     } = useForm({mode: "all"})
-
+    const {setAuth} = useContext(AuthContext)
+    const {setStatus} = useContext(AppContext)
     const [loading, setLoading] = useState(false)
 
     const handleForm = async (data) => {
         setLoading(true)
-        await console.log(data)
-        setTimeout(() => {
-            setLoading(false)
-        }, 3000)
-        clearTimeout()
+        if (data.login === 'vip' && data.password === '11111111') {
+            setAuth('customer')
+            setStatus('vip')
+        } else if (data.login === 'manager' && data.password === '11111111') {
+            setAuth('manager')
+            setStatus('manager')
+        }
+
     }
 
     return (

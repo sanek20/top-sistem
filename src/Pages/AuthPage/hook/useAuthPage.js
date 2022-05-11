@@ -4,6 +4,8 @@ import {Link} from "react-router-dom";
 export const useAuthPage = () => {
     const [authFormat, setAuthFormat] = useState(true);
 
+
+
     const underBlock = () => {
         if (authFormat) {
             return (

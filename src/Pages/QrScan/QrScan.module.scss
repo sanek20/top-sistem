@@ -1,3 +1,14 @@
+@mixin scanBtn {
+  min-width: 50px;
+  height: inherit;
+  border-radius: 14px;
+  background-color: #0092ef;
+  border: none;
+  outline: none;
+}
+
+$redColor: #e5465c;
+
 .qrScanPage {
   padding-top: 30px;
   background-color: #EFF2F4;
@@ -91,14 +102,26 @@
   border-radius: 14px 0 0 14px;
 }
 .formBtn {
-  min-width: 50px;
-  height: inherit;
+  @include scanBtn;
   border-radius: 0 14px 14px 0;
-  background-color: #0092ef;
-  border: none;
-  outline: none;
   path {
     stroke: #FFF;
+  }
+}
+
+.again {
+  display: block;
+  @include scanBtn;
+  height: 54px;
+  width: 80%;
+  margin: 20px auto;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid $redColor;
+  color: $redColor;
+  &:active {
+    color: #FFFFFF;
+    background-color: $redColor;
   }
 }
 

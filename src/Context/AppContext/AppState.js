@@ -1,7 +1,7 @@
 import React, {useReducer} from "react";
 import {AppContext} from "./AppContext";
 import {appReducer} from "./AppReducer";
-import {SET_TC} from "../../utils/types";
+import {SET_STATUS, SET_TC} from "../../utils/types";
 
 const initialState = {
     user: {
@@ -26,20 +26,22 @@ const initialState = {
 };
 
 export const AppState = ({children}) => {
-
-
     const [state, dispatch] = useReducer(appReducer, initialState)
 
     const selectTc = (id) => {
-        dispatch({type: SET_TC, payload: id.toString()})
+        dispatch({type: SET_TC, payload: {id: id.toString()}})
     }
 
-    const { user, card, tc } = state
+    const setStatus = (status) => {
+        dispatch({type: SET_STATUS, payload: {status}})
+    }
+
+    const { user, card, tc, auth } = state
 
     return (
         <AppContext.Provider value={{
-            user, card, tc,
-            selectTc,
+            user, card, tc, auth,
+            selectTc, setStatus,
             status: card.status
         }}>
             {children}

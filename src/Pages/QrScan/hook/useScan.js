@@ -17,7 +17,7 @@ const useScan = () => {
     const [success, setSuccess] = useState(false)
     const [showInput, setShowInput] = useState(false)
     const navigate = useNavigate()
-    const {register, formState: {errors, isSubmitSuccessful}, handleSubmit} = useForm({mode: "all"})
+    const {register, formState: {errors, isSubmitSuccessful}, handleSubmit, reset} = useForm({mode: "all"})
 
     const resultHandler = async (res, err) => {
         if (!!res) {
@@ -44,10 +44,35 @@ const useScan = () => {
 
     const showInputHandler = (val) => {
         setShowInput(val)
+        setSuccess(false)
+    }
+
+    const tryAgain = () => {
+        setLoading(false)
+        setError(false)
+        setSuccess(false)
+        setShowInput(false)
+        setData('')
+        reset()
+    }
+
+    const onSuccess = async (number) => {
+        setLoading(true)
+        try {
+            await navigate(`/bonus/${number}`)
+        } catch (e) {
+            setError(!!e)
+        } finally {
+            setLoading(false)
+        }
     }
 
     const statusButton = <>
-        <button disabled={error && !success} className={error && !success ? cls.error : cls.success}>
+        <button
+            onClick={() => onSuccess(data)}
+            disabled={error && !success}
+            className={error && !success ? cls.error : cls.success}
+        >
             {error && !success
                 ? <><AiOutlineScan/> Сканируем...</>
                 : <><MdDoneAll/>Продожить</>
@@ -75,7 +100,6 @@ const useScan = () => {
             </InputMask>
             <button className={cls.formBtn}><GrLinkNext/></button>
         </form>
-        <div onClick={() => showInputHandler(false)} className={cls.showInput}><span>Открыть камеру</span></div>
     </>
 
     const qrRender = <>
@@ -107,7 +131,8 @@ const useScan = () => {
         inputForm,
         qrRender,
         checkNumber,
-        isSubmitSuccessful
+        isSubmitSuccessful,
+        tryAgain
     }
 };
 

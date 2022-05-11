@@ -4,15 +4,19 @@ import {HeaderProfilePage} from "../ProfilePage/Components/HeaderProfilePage";
 import {LayoutContent} from "../../Layouts/LayoutContent";
 import {FooterPanel} from "../../Components/FooterPanel";
 import {CatalogItemPreview} from "./Components/CatalogItemPreview/CatalogItemPreview";
-import {useParams} from "react-router-dom";
+import {Navigate, useParams} from "react-router-dom";
 import {catalogList} from "../../data/data";
 import {ShopsList} from "../../Components/ShopsList";
-import {ModalContext} from "../../Context/ModalContext/ModalContext";
+import {AuthContext} from "../../Context/AuthContext/AuthContext";
 
 const CatalogItemPage = () => {
     let {id: itemId} = useParams()
-    const modalState = useContext(ModalContext)
     const [data, setData] = useState({})
+    const {auth} = useContext(AuthContext)
+
+    if (!auth) {
+        return <Navigate to="/auth" replace />
+    }
 
     useEffect(() => {
         return () => {

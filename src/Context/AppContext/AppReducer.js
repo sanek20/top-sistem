@@ -1,9 +1,9 @@
-import {TOGGLE_OPEN} from "../../utils/types";
+import {SET_STATUS, SET_TC} from "../../utils/types";
 
 const handlers = {
     DEFAULT: state => state,
-    TOGGLE_OPEN: state => ({...state, open: !state.open}),
-    SET_TC: (state, payload) => ({...state, tc: {...state.tc, id: payload.id}})
+    [SET_TC]: (state, {payload}) => ({...state, tc: {...state.tc, id: payload.id}}),
+    [SET_STATUS]: (state, {payload}) => ({...state, card: {...state.card, status: payload.status}})
 }
 
 export const appReducer = (state, action) => {

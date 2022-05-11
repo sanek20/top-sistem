@@ -4,15 +4,20 @@ import {AdsContainer} from "../../Containers/AdsContainer";
 import {LayoutContent} from "../../Layouts/LayoutContent";
 import {Messages} from "../../Components/Messages";
 import {FooterPanel} from "../../Components/FooterPanel";
-import {AppContext} from "../../Context/AppContext/AppContext";
 import {HeaderMainManager} from "../../Containers/HeaderMain/HeaderMainManager";
+import {AuthContext} from "../../Context/AuthContext/AuthContext";
+import {Navigate} from 'react-router-dom'
 
 const MainPage = () => {
-    const {status} = useContext(AppContext)
+    const {auth, role} = useContext(AuthContext)
+
+    if (!auth) {
+        return <Navigate to="/auth" replace />
+    }
 
     return (
         <>
-            {status === 'manager' ? <HeaderMainManager /> : <HeaderMain/>}
+            {role === 'manager' ? <HeaderMainManager /> : <HeaderMain/>}
             <LayoutContent>
                 <AdsContainer/>
                 <Messages/>
