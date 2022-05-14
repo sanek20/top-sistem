@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from "react";
+import React, {useContext} from "react";
 import styles from './MainLayout.module.scss'
 import {ModalContext} from "../../Context/ModalContext/ModalContext";
 import {Modal} from "../../Containers/Modal";
@@ -10,7 +10,6 @@ import {CSSTransition} from "react-transition-group";
 export const MainLayout = ({children}) => {
     const modalState = useContext(ModalContext)
     const {card} = useContext(AppContext)
-
 
     return (
         <main className={styles.mainLayout}>

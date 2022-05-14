@@ -1,9 +1,9 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {AppContext} from "../../../Context/AppContext/AppContext";
+import React, {useEffect, useState} from 'react';
 import {backgrounds, gradientsStatus} from "../../../data/data";
+import {useSelector} from "react-redux";
 
 export const useBackground = () => {
-    const {card} = useContext(AppContext)
+    const card = useSelector(state => state.card)
     const [background, setBackground] = useState()
     const [gradient, setGradient] = useState()
     const status = card.status.toLowerCase()

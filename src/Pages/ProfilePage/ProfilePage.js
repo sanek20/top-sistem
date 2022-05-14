@@ -1,30 +1,31 @@
-import React, {useContext} from 'react';
+import React from 'react'
+import { useSelector } from 'react-redux'
+import { Navigate } from 'react-router-dom'
+
+import { FooterPanel } from '../../Components/FooterPanel'
+import { LayoutContent } from '../../Layouts/LayoutContent'
+
+import { HeaderProfilePage } from './Components/HeaderProfilePage'
+import { ProfileForm } from './Components/ProfileForm/ProfileForm'
 import cls from './ProfilePage.module.scss'
-import {LayoutContent} from "../../Layouts/LayoutContent";
-import {HeaderProfilePage} from "./Components/HeaderProfilePage";
-import {ProfileForm} from "./Components/ProfileForm/ProfileForm";
-import {FooterPanel} from "../../Components/FooterPanel";
-import {AuthContext} from "../../Context/AuthContext/AuthContext";
-import {Navigate} from "react-router-dom";
 
 
 const ProfilePage = () => {
-    const {auth, status} = useContext(AuthContext)
+	const { auth } = useSelector((state) => state.auth)
 
-    if (!auth) {
-        return <Navigate to="/auth" replace />
-    }
+	if (!auth) {
+		return <Navigate to='/auth' replace />
+	}
 
-    return (
-        <div className={cls.profilePage}>
-            <HeaderProfilePage avatar={true}/>
-            <LayoutContent>
-                <ProfileForm />
+	return (
+		<div className={cls.profilePage}>
+			<HeaderProfilePage avatar={true} />
+			<LayoutContent>
+				<ProfileForm />
+			</LayoutContent>
+			<FooterPanel active={'profile'} />
+		</div>
+	)
+}
 
-            </LayoutContent>
-            <FooterPanel active={'profile'} />
-        </div>
-    );
-};
-
-export {ProfilePage};
+export { ProfilePage }

@@ -13,6 +13,7 @@ const QrScan = () => {
         statusButton, inputForm, qrRender, checkNumber,} = useScan()
     const {auth} = useContext(AuthContext)
 
+
     if (!auth) {
         return <Navigate to="/auth" replace />
     }

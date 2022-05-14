@@ -1,11 +1,11 @@
-import React, {useContext} from "react";
+import React from "react";
 import cls from "./scss/ProfileDisplay.module.scss";
 import placeholderAvatar from '../../img/placeholderAvatar.png'
 import {Link} from "react-router-dom";
-import {AppContext} from "../../Context/AppContext/AppContext";
+import {useSelector} from "react-redux";
 
 const ProfileDisplay = ({type}) => {
-    const {user} = useContext(AppContext)
+    const user = useSelector(state => state.user)
 
     const full = type === 'full'
     return (
