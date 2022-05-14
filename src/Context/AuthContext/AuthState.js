@@ -1,30 +1,66 @@
-// noinspection JSCheckFunctionSignatures
 
-import React, {useReducer} from "react";
+import React, {useEffect, useReducer} from "react";
 import {AuthContext} from "./AuthContext";
 import {authReducer} from "./AuthReducer";
-import {SET_AUTH} from "../../utils/types";
+import {SET_AUTH, SET_ERROR, SET_LOADING, SIGN_OUT} from "../../utils/types";
+import api from "../../utils/api";
 
 export const AuthState = ({children}) => {
     const initialState = {
         auth: false,
         role: '',
         isManager: true,
+        loading: false,
+        error: false,
+        userData: {}
     };
     const [state, dispatch] = useReducer(authReducer, initialState)
 
-    const setAuth = (role) => {
-        const isManager = role === 'manager'
-        dispatch({type: SET_AUTH, payload: {role, isManager}})
-        console.log(state)
+    const autoSignIn = () => {
+        const login = localStorage.getItem('login')
+        const password = localStorage.getItem('password')
+        if (login && password) {
+            signInState(login, password).then(() => {})
+        }
     }
 
-    const { auth, role, isManager } = state
+    useEffect(() => {
+        autoSignIn()
+    }, [])
+
+    const signInState = async (login, password) => {
+        dispatch({type: SET_LOADING})
+        await api.getAuth(login, password)
+            .then(res => {
+                if (res.data.id) {
+                    const role = res.data.role.name
+                    const isManager = res.data.role.id === "2"
+                    return {role, isManager, userData: res.data}
+                } else throw Error("Неправильный e-mail или пароль")
+            })
+            .then(({role, isManager, userData}) => {
+                dispatch({type: SET_AUTH, payload: {isManager, role, userData}})
+            })
+            .then(() => {
+                localStorage.setItem('login', login)
+                localStorage.setItem('password', password)
+            })
+            .catch(e => {
+                dispatch({type: SET_ERROR})
+            })
+    }
+
+    const signOut = () => {
+        dispatch({type: SET_LOADING})
+        dispatch({type: SIGN_OUT})
+    }
+
+    const {auth, role, isManager, loading, error, userData} = state
 
     return (
         <AuthContext.Provider value={{
-            auth, role, isManager,
-            setAuth
+            auth, role, isManager, loading, error, userData,
+            signInState, signOut
         }}>
             {children}
         </AuthContext.Provider>

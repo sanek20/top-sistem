@@ -6,9 +6,12 @@ import {TiWarning} from 'react-icons/ti'
 import {emailReg, phoneReg} from "../../../../data/regexp";
 import {AppContext} from "../../../../Context/AppContext/AppContext";
 import InputMask from 'react-input-mask';
+import {Button} from "@mui/material";
+import {AuthContext} from "../../../../Context/AuthContext/AuthContext";
 
 const ProfileForm = () => {
     const {user, card} = useContext(AppContext)
+    const {signOut} = useContext(AuthContext)
     const {
         register,
         formState: {
@@ -180,6 +183,9 @@ const ProfileForm = () => {
                 </button>
 
             </form>
+            <Button onClick={() => signOut()} sx={{width: 1/3, mx: "auto", mt: 3}} variant="outlined" color="error">
+                Выйти
+            </Button>
         </div>
     );
 }

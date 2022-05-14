@@ -6,10 +6,23 @@ import {Messages} from "../../Components/Messages";
 import {FooterPanel} from "../../Components/FooterPanel";
 import {HeaderMainManager} from "../../Containers/HeaderMain/HeaderMainManager";
 import {AuthContext} from "../../Context/AuthContext/AuthContext";
-import {Navigate} from 'react-router-dom'
+import {Navigate, useLocation} from 'react-router-dom'
+import {AppContext} from "../../Context/AppContext/AppContext";
 
 const MainPage = () => {
-    const {auth, role} = useContext(AuthContext)
+    const {auth, role, userData} = useContext(AuthContext)
+    const {setDataOfUser} = useContext(AppContext)
+
+    useEffect(() => {
+        return () => {
+            try {
+                !!userData.id && setDataOfUser(userData)
+            } catch (e) {
+                console.log("MAIN PAGE: ", e)
+            }
+        };
+    }, []);
+
 
     if (!auth) {
         return <Navigate to="/auth" replace />

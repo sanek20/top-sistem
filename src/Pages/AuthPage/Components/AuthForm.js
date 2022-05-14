@@ -4,6 +4,7 @@ import {useForm} from "react-hook-form";
 import {TiWarning} from "react-icons/ti";
 import {AuthContext} from "../../../Context/AuthContext/AuthContext";
 import {AppContext} from "../../../Context/AppContext/AppContext";
+import {useAuthPage} from "../hook/useAuthPage";
 
 const AuthForm = () => {
     const {
@@ -11,24 +12,12 @@ const AuthForm = () => {
         formState: {errors},
         handleSubmit,
     } = useForm({mode: "all"})
-    const {setAuth} = useContext(AuthContext)
-    const {setStatus} = useContext(AppContext)
     const [loading, setLoading] = useState(false)
+    const {signInHandler} = useAuthPage()
 
-    const handleForm = async (data) => {
-        setLoading(true)
-        if (data.login === 'vip' && data.password === '11111111') {
-            setAuth('customer')
-            setStatus('vip')
-        } else if (data.login === 'manager' && data.password === '11111111') {
-            setAuth('manager')
-            setStatus('manager')
-        }
-
-    }
 
     return (
-        <form onSubmit={handleSubmit(handleForm)}>
+        <form onSubmit={handleSubmit(signInHandler)}>
             <div className={cls.formItem}>
                 <label>
                     Логин или e-mail

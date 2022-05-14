@@ -7,6 +7,7 @@ import {FooterPanel} from "../../Components/FooterPanel";
 import {AuthContext} from "../../Context/AuthContext/AuthContext";
 import {Navigate} from "react-router-dom";
 
+
 const ProfilePage = () => {
     const {auth, status} = useContext(AuthContext)
 
@@ -19,6 +20,7 @@ const ProfilePage = () => {
             <HeaderProfilePage avatar={true}/>
             <LayoutContent>
                 <ProfileForm />
+
             </LayoutContent>
             <FooterPanel active={'profile'} />
         </div>

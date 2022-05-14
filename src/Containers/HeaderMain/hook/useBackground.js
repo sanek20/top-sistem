@@ -6,14 +6,19 @@ export const useBackground = () => {
     const {card} = useContext(AppContext)
     const [background, setBackground] = useState()
     const [gradient, setGradient] = useState()
+    const status = card.status.toLowerCase()
 
     const bgStyles = async () => {
-        const bg = await backgrounds.find(i => i.status === card.status)
-        return ({backgroundImage: `url('${bg.asset}')`})
+        try {
+            const bg = await backgrounds.find(i => i.status === status).asset
+            return ({backgroundImage: `url('${bg}')`})
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     const bgGradients = async () => {
-        const bg = await gradientsStatus.find(i => i.status === card.status)
+        const bg = await gradientsStatus.find(i => i.status === status)
         return bg.asset
     }
 
