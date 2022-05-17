@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Navigate, useParams } from 'react-router-dom'
 
 import { FooterPanel } from '../../Components/FooterPanel'
 import { ShopsList } from '../../Components/ShopsList'
 import { LayoutContent } from '../../Layouts/LayoutContent'
-import { catalogList } from '../../data/data'
 import cls from '../CatalogPage/CatalogPage.module.scss'
 import { HeaderProfilePage } from '../ProfilePage/Components/HeaderProfilePage'
 
@@ -21,11 +20,11 @@ const CatalogItemPage = () => {
 		return <Navigate to='/auth' replace />
 	}
 
-	useEffect(() => {
-		return () => {
-			setData(catalogList.find((i) => i.id === itemId))
-		}
-	}, [])
+	// useEffect(() => {
+	// 	return () => {
+	// 		setData(catalogList.find((i) => i.id === itemId))
+	// 	}
+	// }, [])
 
 	// useMemo(() => setData(catalogList.find(i => i.id === itemId)), data);
 	return (

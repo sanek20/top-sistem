@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { signIn } from '../../../Store/AuthState/authServices'
+import moment from 'moment'
+
+import { register, signIn } from '../../../Store/AuthState/authServices'
 
 
 export const useAuthPage = () => {
@@ -16,6 +18,15 @@ export const useAuthPage = () => {
 		if (!!authFormat) {
 			dispatch(signIn({ login, password }))
 		}
+	}
+
+	const registerHandler = (data) => {
+		const obj = {
+			...data,
+			birth: moment(data.birth).format('YYYY-MM-DD')
+		}
+
+		dispatch(register(obj))
 	}
 
 	const underBlock = () => {
@@ -42,6 +53,7 @@ export const useAuthPage = () => {
 		authFormat,
 		setAuthFormat,
 		signInHandler,
-		underBlock
+		underBlock,
+		registerHandler
 	}
 }

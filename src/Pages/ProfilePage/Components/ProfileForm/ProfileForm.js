@@ -1,12 +1,11 @@
-import { Button } from '@mui/material'
-import React, { useState } from 'react'
+import React from 'react'
 import { useForm } from 'react-hook-form'
 import { TiWarning } from 'react-icons/ti'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { signOut } from '../../../../Store/AuthState/authSlice'
-import { ages } from '../../../../data/data'
-import { emailReg, phoneReg } from '../../../../data/regexp'
+import { updateUserProfile } from '../../../../Store/UserState/userServices'
+import { cardFormatter } from '../../../../utils/cardFormatter'
 
 import cls from './ProfileForm.module.scss'
 
@@ -19,44 +18,48 @@ const ProfileForm = () => {
 		formState: { errors },
 		handleSubmit
 	} = useForm({
-		mode: 'all'
+		mode: 'all',
+		defaultValues: {
+			cardNumber: cardFormatter(card.number),
+			email: user.email,
+			phone: user.phone,
+			firstName: user.firstName,
+			lastName: user.lastName
+		}
 	})
 
-	const [loading, setLoading] = useState(false)
-
 	const handleForm = async (data) => {
-		setLoading(true)
-		await console.log(data)
-		setTimeout(() => {
-			setLoading(false)
-		}, 3000)
-		clearTimeout()
+		const dataForSend = {
+			firstName: data.firstName,
+			lastName: data.lastName,
+			phone: data.phone,
+			id: user.id
+		}
+		dispatch(updateUserProfile(dataForSend))
 	}
 
 	return (
 		<div className={cls.wrapper}>
 			<div className={cls.title}>Информация о профиле</div>
-
 			<form onSubmit={handleSubmit(handleForm)} className={cls.formWrap}>
 				{/*Card Number*/}
 				<div className={cls.formItem}>
 					<label>№ карты</label>
-					<input
-						className={cls.input}
-						disabled
-						{...register('cardNumber', {
-							value: card.number
-						})}
-					/>
+					<input className={cls.input} disabled {...register('cardNumber')} />
+				</div>
+				{/*E-mail*/}
+				<div className={cls.formItem}>
+					<label>Email</label>
+					<input disabled type='email' {...register('email')} />
 				</div>
 				{/*First Name*/}
 				<div className={cls.formItem}>
 					<label>Имя</label>
 					<input
+						disabled={user.loading}
 						className={cls.input}
 						{...register('firstName', {
-							required: true,
-							value: user.name
+							required: true
 						})}
 					/>
 					<div className={cls.errMsg}>
@@ -69,74 +72,48 @@ const ProfileForm = () => {
 					</div>
 				</div>
 
-				{/*Sex*/}
-				{/*...select form*/}
+				{/*Last Name*/}
 				<div className={cls.formItem}>
-					<label>Sex</label>
-					<select
-						{...register('sex', {
-							value: user.sex
-						})}
-					>
-						<option value='male'>Male</option>
-						<option value='female'>Female</option>
-					</select>
-				</div>
-
-				{/*Age*/}
-				{/*.. select form*/}
-				<div className={cls.formItem}>
-					<label>AGE</label>
-					<select
-						{...register('age', {
-							value: user.age
-						})}
-					>
-						{ages.map((i, idx) => {
-							return (
-								<option value={i.value} key={idx * Math.random()}>
-									{i.label}
-								</option>
-							)
-						})}
-					</select>
-				</div>
-
-				{/*E-mail*/}
-				<div className={cls.formItem}>
-					<label>Email</label>
+					<label>Фамилия</label>
 					<input
-						type='email'
-						className={errors?.email && cls.error}
-						{...register('email', {
-							pattern: {
-								value: emailReg(),
-								message: 'Введите корректный e-mail'
-							},
-							value: user.email
+						disabled={user.loading}
+						className={cls.input}
+						{...register('lastName', {
+							required: true
 						})}
 					/>
 					<div className={cls.errMsg}>
-						{errors?.email && (
+						{errors?.lastName && (
 							<span>
 								<TiWarning />
-								{errors?.email?.message || 'Введите корректное значение'}
+								{errors?.lastName?.message || 'Введите корректное значение'}
 							</span>
 						)}
 					</div>
 				</div>
+
+				{/*/!*Sex*!/*/}
+				{/*/!*...select form*!/*/}
+				{/*<div className={cls.formItem}>*/}
+				{/*	<label>Пол</label>*/}
+				{/*	<select*/}
+				{/*		{...register('sex', {*/}
+				{/*			value: user.sex*/}
+				{/*		})}*/}
+				{/*	>*/}
+				{/*		<option value='male'>Мужской</option>*/}
+				{/*		<option value='female'>Женский</option>*/}
+				{/*	</select>*/}
+				{/*</div>*/}
+
 				{/*Phone*/}
 				<div className={cls.formItem}>
-					<label>Phone number</label>
+					<label>Мобильный телефон</label>
 
 					<input
+						disabled={user.loading}
 						{...register('phone', {
-							value: user.phone,
-							minLength: 10,
-							pattern: {
-								value: phoneReg(),
-								message: 'Введите телефон в формате +7ХХХХХХХХХХ'
-							}
+							minLength: 10
 						})}
 					/>
 
@@ -149,18 +126,14 @@ const ProfileForm = () => {
 						)}
 					</div>
 				</div>
-				<button className={cls.btn} disabled={loading}>
-					{!loading ? 'Сохранить' : 'Загрузка...'}
+				<button className={cls.btn} disabled={user.loading}>
+					{!user.loading ? 'Сохранить' : 'Загрузка...'}
 				</button>
 			</form>
-			<Button
-				onClick={() => dispatch(signOut())}
-				sx={{ width: 1 / 3, mx: 'auto', mt: 3 }}
-				variant='outlined'
-				color='error'
-			>
+			<button onClick={() => dispatch(signOut())} className={cls.signOutBtn}>
 				Выйти
-			</Button>
+			</button>
+			<p>Build 1.6</p>
 		</div>
 	)
 }

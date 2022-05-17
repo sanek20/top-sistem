@@ -1,23 +1,23 @@
-import React, {useContext} from 'react';
-import {QRCodeSVG} from 'qrcode.react'
-import {AppContext} from "../../Context/AppContext/AppContext";
+import { QRCodeSVG } from 'qrcode.react'
+import React from 'react'
+import { useSelector } from 'react-redux'
 
-const QRRender = (value) => {
-    const {card} = useContext(AppContext)
+const QRRender = () => {
+	const { number } = useSelector((state) => state.card)
 
-    if (card.number === '') {
-        return "Loading..."
-    }
-    return (
-        <QRCodeSVG
-            value={card.number}
-            size={230}
-            bgColor={'#fff'}
-            fgColor={'#000'}
-            includeMargin={false}
-            level={'L'}
-        />
-    );
+	if (number === '') {
+		return 'Loading...'
+	}
+	return (
+		<QRCodeSVG
+			value={number}
+			size={230}
+			bgColor={'#fff'}
+			fgColor={'#000'}
+			includeMargin={false}
+			level={'L'}
+		/>
+	)
 }
 
-export {QRRender};
+export { QRRender }

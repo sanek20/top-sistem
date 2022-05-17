@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { useBackground } from '../../Containers/HeaderMain/hook/useBackground'
-import { AuthContext } from '../../Context/AuthContext/AuthContext'
 import { ModalContext } from '../../Context/ModalContext/ModalContext'
 import { QRCodeIcon } from '../UI/QRCodeIcon/QRCodeIcon'
 
@@ -14,21 +13,9 @@ const FooterPanelUI = (props) => {
 	const { activeState, activeIcon, notActiveIcon } = props
 	const modalState = useContext(ModalContext)
 	const card = useSelector((state) => state.card)
-	const { role } = useContext(AuthContext)
+	const { isManager } = useSelector((state) => state.auth)
 	const { gradient } = useBackground()
 	const navigate = useNavigate()
-
-	const [isManager, setIsManager] = useState(false)
-
-	const setStateIsManager = () => {
-		if (role === 'manager') setIsManager(true)
-	}
-
-	useEffect(() => {
-		return () => {
-			setStateIsManager()
-		}
-	}, [role])
 
 	return (
 		<div className={cls.wrapper}>

@@ -1,20 +1,17 @@
-import React, {useContext} from 'react';
+import React from 'react'
+import { useSelector } from 'react-redux'
+
 import cls from '../HeaderMain.module.scss'
-import {AppContext} from "../../../Context/AppContext/AppContext";
+
 
 const CashbackDisplay = () => {
-    const {user} = useContext(AppContext)
+	const { cashbackPercent } = useSelector((state) => state.user)
+	return (
+		<div className={cls.cashback}>
+			<div className={cls.percent}>{cashbackPercent}%</div>
+			<div className={cls.text}>начисление с покупки</div>
+		</div>
+	)
+}
 
-    return (
-        <div className={cls.cashback}>
-            <div className={cls.percent}>
-                {user.cashbackPercent}%
-            </div>
-            <div className={cls.text}>
-                начисление с покупки
-            </div>
-        </div>
-    );
-};
-
-export {CashbackDisplay};
+export { CashbackDisplay }

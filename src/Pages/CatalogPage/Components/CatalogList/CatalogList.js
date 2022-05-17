@@ -1,27 +1,37 @@
-import React, {useState} from 'react';
+import React from 'react'
+import { useSelector } from 'react-redux'
+
+import { CatalogListItem } from '../CatalogListItem/CatalogListItem'
+import { SelectCity } from '../SelectCity/SelectCity'
+
 import cls from './CatalogList.module.scss'
-import {SelectCity} from "../SelectCity/SelectCity";
-import {CatalogListItem} from "../CatalogListItem/CatalogListItem";
-import {catalogList} from "../../../../data/data";
 
-const CatalogList = ({chosenTc, chosenCity}) => {
-    const [selectCity, setSelectCity] = useState(1)
 
-    return (
-        <div className={cls.wrapper}>
-            <SelectCity setSelectCity={setSelectCity}/>
-            <div className={cls.list}>
-                {catalogList.map(item => {
-                    return (
-                        <div className={cls.listItem} key={item.id}>
-                            <CatalogListItem {...item} />
-                        </div>
-                    )
-                })}
-            </div>
+const CatalogList = ({ catalog, cities }) => {
+	const { selectedCity } = useSelector((state) => state.shoppingCenters)
 
-        </div>
-    );
-};
+	return (
+		<div className={cls.wrapper}>
+			<SelectCity cities={cities} />
+			<div className={cls.list}>
+				{catalog.map((item) => {
+					if (item.city === selectedCity && selectedCity !== 'Все города') {
+						return (
+							<div className={cls.listItem} key={item.name}>
+								<CatalogListItem {...item} />
+							</div>
+						)
+					} else if (selectedCity === 'Все города') {
+						return (
+							<div className={cls.listItem} key={item.name}>
+								<CatalogListItem {...item} />
+							</div>
+						)
+					}
+				})}
+			</div>
+		</div>
+	)
+}
 
-export {CatalogList};
+export { CatalogList }
