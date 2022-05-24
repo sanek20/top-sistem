@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 
 import { FooterPanel } from '../../Components/FooterPanel'
+import { Loader } from '../../Components/UI/Loader'
 import { LayoutContent } from '../../Layouts/LayoutContent'
 
 import { HeaderProfilePage } from './Components/HeaderProfilePage'
@@ -11,10 +12,14 @@ import cls from './ProfilePage.module.scss'
 
 
 const ProfilePage = () => {
-	const { auth } = useSelector((state) => state.auth)
+	const { auth, loading } = useSelector((state) => state.auth)
 
 	if (!auth) {
 		return <Navigate to='/auth' replace />
+	}
+
+	if (loading) {
+		return <Loader transparent={false} />
 	}
 
 	return (
