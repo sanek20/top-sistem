@@ -6,7 +6,6 @@ import { TiWarning } from 'react-icons/ti'
 import { useSelector } from 'react-redux'
 
 import ru from 'date-fns/locale/ru'
-import moment from 'moment'
 
 import { emailReg, phoneReg } from '../../../data/regexp'
 import cls from '../../ProfilePage/Components/ProfileForm/ProfileForm.module.scss'
@@ -27,9 +26,6 @@ const RegisterForm = () => {
 	const { registerHandler } = useAuthPage()
 	const { loading } = useSelector((state) => state.auth)
 
-	const testHandler = (data) => {
-		console.log(moment(data.birth).format('YYYY-MM-DD'))
-	}
 
 	return (
 		<form onSubmit={handleSubmit(registerHandler)}>

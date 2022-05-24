@@ -1,6 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { getShoppingCenters } from './shoppingCentersServices'
+import {
+	getShoppingCenters,
+	selectShoppingCenter
+} from './shoppingCentersServices'
 
 
 const shoppingCentersSlice = createSlice({
@@ -19,9 +22,7 @@ const shoppingCentersSlice = createSlice({
 			state.selectedCity = action.payload
 		},
 		setSelectedCenter(state, action) {
-			state.selectedCenter = state.centers.find(
-				(i) => i.name === action.payload
-			)
+			state.selectedCenter = state.centers.find((i) => i.id === action.payload)
 		}
 	},
 	extraReducers: {
@@ -40,6 +41,19 @@ const shoppingCentersSlice = createSlice({
 			state.loading = false
 			state.error = true
 			state.errMessage = payload.message
+		},
+		[selectShoppingCenter.pending]: (state) => {
+			state.loading = true
+		},
+		[selectShoppingCenter.fulfilled]: (state, { payload }) => {
+			state.selectedCenter = state.centers.find(
+				(i) => i.id === payload.shopping_center_id
+			)
+			state.loading = false
+		},
+		[selectShoppingCenter.rejected]: (state, action) => {
+			state.error = true
+			state.loading = false
 		}
 	}
 })

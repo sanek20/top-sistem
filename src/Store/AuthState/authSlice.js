@@ -12,11 +12,11 @@ import {
 const authSlice = createSlice({
 	name: 'auth',
 	initialState: {
-		auth: false,
+		auth: true,
 		role: '',
-		isVerified: false,
-		isManager: true,
-		loading: false,
+		isVerified: true,
+		isManager: false,
+		loading: true,
 		error: false,
 		errorMessage: '',
 		userData: {}
@@ -33,6 +33,9 @@ const authSlice = createSlice({
 			state.error = false
 			state.loading = false
 			state.errorMessage = ''
+		},
+		setAuthFalse(state, action) {
+			state.auth = false
 		}
 	},
 	extraReducers: {
@@ -55,17 +58,24 @@ const authSlice = createSlice({
 			state.loading = true
 			state.error = false
 		},
-		[signIn.fulfilled]: (state) => {
+		[signIn.fulfilled]: (state, action) => {
+			state.auth = action.payload
 			state.loading = false
 		},
 		[signIn.rejected]: (state, action) => {
+			state.auth = false
 			state.error = true
 			state.loading = false
 			state.errorMessage = action.payload
 		},
+		[autoSign.pending]: (state, action) => {
+			state.loading = true
+		},
 		[autoSign.rejected]: (state, action) => {
+			state.auth = false
 			state.error = true
 			state.errorMessage = action.payload
+			state.loading = false
 		},
 		[register.pending]: (state) => {
 			state.loading = true
@@ -93,5 +103,5 @@ const authSlice = createSlice({
 	}
 })
 
-export const { signOut, clearErrors } = authSlice.actions
+export const { signOut, clearErrors, setAuthFalse } = authSlice.actions
 export default authSlice.reducer

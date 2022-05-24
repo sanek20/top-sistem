@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 
 import api from '../../utils/api'
 import { setDataCard } from '../CardState/cardSlice'
+import { setSelectedCenter } from '../ShoppingCenters/shoppingCentersSlice'
 import { setDataUser } from '../UserState/userSlice'
 
 
@@ -13,6 +14,7 @@ export const signIn = createAsyncThunk(
 			const data = response.data
 			if (!!data.id) {
 				dispatch(setAuthData({ data, login, password }))
+				return true
 			} else {
 				throw new Error('Invalid or incorrect login or password')
 			}
@@ -36,6 +38,7 @@ export const setAuthData = createAsyncThunk(
 				}
 				dispatch(setDataUser(data))
 				dispatch(setDataCard(data.card))
+				dispatch(setSelectedCenter(data?.card?.shopping_center_id))
 				return { role, isManager, isVerified, userData: data }
 			} else {
 				throw new Error('Invalid or incorrect login or password')
@@ -52,8 +55,10 @@ export const autoSign = createAsyncThunk(
 		try {
 			const login = localStorage.getItem('login')
 			const password = localStorage.getItem('password')
-			if (login && password) {
+			if (!!login && !!password) {
 				dispatch(signIn({ login, password }))
+			} else {
+				throw new SyntaxError('Have not password and email')
 			}
 		} catch (e) {
 			return rejectWithValue(e)

@@ -11,12 +11,15 @@ import cls from './ProfileForm.module.scss'
 
 
 const ProfileForm = () => {
-	const { user, card } = useSelector((state) => state)
+	const card = useSelector((state) => state.card)
+	const user = useSelector((state) => state.user)
 	const dispatch = useDispatch()
+
 	const {
 		register,
 		formState: { errors },
-		handleSubmit
+		handleSubmit,
+		reset
 	} = useForm({
 		mode: 'all',
 		defaultValues: {
@@ -133,7 +136,7 @@ const ProfileForm = () => {
 			<button onClick={() => dispatch(signOut())} className={cls.signOutBtn}>
 				Выйти
 			</button>
-			<p>Build 1.6</p>
+			<p style={{ margin: '0 auto', display: 'block' }}>Build 1.8</p>
 		</div>
 	)
 }

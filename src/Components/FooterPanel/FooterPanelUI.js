@@ -83,7 +83,7 @@ const FooterPanelUI = (props) => {
 				</div>
 			</div>
 			<div className={cls.leftSide}>
-				<Link to={'/'}>
+				<Link to={'/polls-page'}>
 					<div className={cls.menuItemWrapper}>
 						<div className={cls.menuIcon}>
 							<svg
@@ -99,7 +99,7 @@ const FooterPanelUI = (props) => {
 								/>
 							</svg>
 						</div>
-						<div className={cls.menuText}>Сообщения</div>
+						<div className={cls.menuText}>Опросы</div>
 					</div>
 				</Link>
 				<Link to={'/profile'}>

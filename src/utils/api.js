@@ -73,10 +73,42 @@ class Api {
 			.post(`${this._baseUrl}/users/verify_email?email=${email}&code=${code}`)
 			.then(onResponse)
 	}
+
+	getPollsList(id) {
+		return axios
+			.get(`${this._baseUrl}/polls/shopping_centers?user_id=${id}`)
+			.then(onResponse)
+	}
+
+	getPollBySCId(id) {
+		return axios
+			.get(`${this._baseUrl}/polls?shopping_center_id=${id}`)
+			.then(onResponse)
+	}
+
+	getPollByUser(pollId, userId) {
+		return axios
+			.get(`${this._baseUrl}/polls/${pollId}?user_id=${userId}`)
+			.then(onResponse)
+	}
+
+	setPollChoice(userId, pollId, choiceId) {
+		return axios
+			.post(
+				`${this._baseUrl}/polls/make_choice?user_id=${userId}&poll_id=${pollId}&choice_id=${choiceId}`
+			)
+			.then(onResponse)
+	}
+
+	updateBalanceDueToChoice(userId, centerId) {
+		return axios
+			.get(`${this._baseUrl}/users/${userId}?shopping_center_id=${centerId}`)
+			.then(onResponse)
+	}
 }
 
 const config = {
-	baseUrl: 'https://crm-tc.edvax.ru/api'
+	baseUrl: 'https://top-sistem.ru/api'
 }
 
 const api = new Api(config)

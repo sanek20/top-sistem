@@ -1,17 +1,17 @@
-import React from 'react';
-import {MessagesListItem} from "../MessagesListItem/MessagesListItem";
+import React from 'react'
 
 import cls from '../../scss/Messages.module.scss'
+import { MessagesListItem } from '../MessagesListItem/MessagesListItem'
 
-const MessagesList = () => {
 
-    const arr = [12, 12, 12, 12, 1, 21, 21, 2, 12, 1, 2, 12, 1]
+const MessagesList = (props) => {
+	return (
+		<div className={cls.listWrapper}>
+			{props.list.map((item, idx) => (
+				<MessagesListItem {...item} key={idx} />
+			))}
+		</div>
+	)
+}
 
-    return (
-        <div className={cls.listWrapper}>
-            {arr.map((i, idx) => <MessagesListItem key={idx}/>)}
-        </div>
-    );
-};
-
-export {MessagesList};
+export { MessagesList }

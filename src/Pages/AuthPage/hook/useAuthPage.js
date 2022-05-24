@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import moment from 'moment'
+import dayjs from 'dayjs'
 
 import { register, signIn } from '../../../Store/AuthState/authServices'
 
@@ -23,7 +23,7 @@ export const useAuthPage = () => {
 	const registerHandler = (data) => {
 		const obj = {
 			...data,
-			birth: moment(data.birth).format('YYYY-MM-DD')
+			birth: dayjs(data.birth).format('YYYY-MM-DD')
 		}
 
 		dispatch(register(obj))

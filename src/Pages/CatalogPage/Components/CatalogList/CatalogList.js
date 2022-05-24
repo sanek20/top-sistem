@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import { CatalogListItem } from '../CatalogListItem/CatalogListItem'
@@ -8,26 +8,30 @@ import cls from './CatalogList.module.scss'
 
 
 const CatalogList = ({ catalog, cities }) => {
+	const [shoppingCenters, setShoppingCenters] = useState(catalog)
 	const { selectedCity } = useSelector((state) => state.shoppingCenters)
 
+	useEffect(() => {
+		setShoppingCenters(catalog)
+	}, [catalog])
+
+	const onFilterHandler = (filter) => {
+		let data = [...catalog]
+		if (filter !== 'Все города') {
+			data = data.filter((i) => i.city === filter)
+		}
+		setShoppingCenters(data)
+	}
 	return (
 		<div className={cls.wrapper}>
-			<SelectCity cities={cities} />
+			<SelectCity cities={cities} onFilter={onFilterHandler} />
 			<div className={cls.list}>
-				{catalog.map((item) => {
-					if (item.city === selectedCity && selectedCity !== 'Все города') {
-						return (
-							<div className={cls.listItem} key={item.name}>
-								<CatalogListItem {...item} />
-							</div>
-						)
-					} else if (selectedCity === 'Все города') {
-						return (
-							<div className={cls.listItem} key={item.name}>
-								<CatalogListItem {...item} />
-							</div>
-						)
-					}
+				{shoppingCenters.map((i) => {
+					return (
+						<div className={cls.listItem} key={i.name}>
+							<CatalogListItem {...i} />
+						</div>
+					)
 				})}
 			</div>
 		</div>

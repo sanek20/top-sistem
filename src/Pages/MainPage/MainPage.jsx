@@ -4,6 +4,7 @@ import { Navigate } from 'react-router-dom'
 
 import { FooterPanel } from '../../Components/FooterPanel'
 import { Messages } from '../../Components/Messages'
+import { Loader } from '../../Components/UI/Loader'
 import { AdsContainer } from '../../Containers/AdsContainer'
 import { HeaderMain } from '../../Containers/HeaderMain'
 import { HeaderMainManager } from '../../Containers/HeaderMain/HeaderMainManager'
@@ -12,7 +13,9 @@ import { setCoords } from '../../Store/UserState/userSlice'
 
 
 const MainPage = () => {
-	const { auth, isManager, isVerified } = useSelector((state) => state.auth)
+	const { auth, isManager, isVerified, loading } = useSelector(
+		(state) => state.auth
+	)
 	const dispatch = useDispatch()
 
 	useEffect(() => {
@@ -26,24 +29,30 @@ const MainPage = () => {
 		}
 	}, [])
 
+	if (loading) {
+		return <Loader transparent={false} />
+	}
+
 	if (!auth) {
 		return <Navigate to='/auth' replace />
 	}
 
 	if (!isVerified) {
-		return <Navigate to='/verified/fs' replace />
+		return <Navigate to='/verified/w' replace />
 	}
 
-	return (
-		<>
-			{isManager ? <HeaderMainManager /> : <HeaderMain />}
-			<LayoutContent>
-				<AdsContainer />
-				<Messages />
-			</LayoutContent>
-			<FooterPanel active={'home'} />
-		</>
-	)
+	if (auth) {
+		return (
+			<>
+				{isManager ? <HeaderMainManager /> : <HeaderMain />}
+				<LayoutContent>
+					<AdsContainer />
+					<Messages />
+				</LayoutContent>
+				<FooterPanel active={'home'} />
+			</>
+		)
+	}
 }
 
 export { MainPage }

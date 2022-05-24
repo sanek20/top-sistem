@@ -1,8 +1,7 @@
-import ru from 'date-fns/locale/ru'
-import moment from 'moment'
+import dayjs from 'dayjs'
 
 export const lastDayOfMonth = () => {
 	const date = new Date()
 	const lastDayDate = new Date(date.getFullYear(), date.getMonth() + 1, 0)
-	return moment(lastDayDate).locale('ru').format('DD.MM')
+	return dayjs(lastDayDate).format('DD.MM')
 }

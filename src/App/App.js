@@ -16,8 +16,11 @@ function App() {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		dispatch(autoSign())
-		dispatch(getShoppingCenters())
+		Promise.race([dispatch(autoSign()), dispatch(getShoppingCenters())]).then(
+			() => {}
+		)
+		// dispatch(autoSign())
+		// dispatch(getShoppingCenters())
 	}, [])
 
 	return (

@@ -9,6 +9,7 @@ import cls from './scss/ProfileDisplay.module.scss'
 
 const ProfileDisplay = ({ type }) => {
 	const user = useSelector((state) => state.user)
+	const { isManager } = useSelector((state) => state.auth)
 
 	const full = type === 'full'
 	return (
@@ -22,6 +23,7 @@ const ProfileDisplay = ({ type }) => {
 				<div className={full ? cls.name : cls.nameLight}>
 					{`${user?.firstName} ${user?.lastName}` || 'Имя пользователя'}
 				</div>
+				{isManager && <div style={{ fontSize: 12 }}>Профиль продавца</div>}
 				{full && (
 					<Link
 						to={'/profile'}
