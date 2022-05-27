@@ -44,7 +44,7 @@ const AuthPage = () => {
 					<div className={cls.errorMsg}>
 						{authFormat
 							? 'Неправильный логин или пароль'
-							: 'Пользователь уже зарегистрирован'}
+							: 'Что-то пошло не так... Попробуйте еще раз'}
 					</div>
 				)}
 				<div className={cls.underBlock}>{underBlock()}</div>

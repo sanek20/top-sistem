@@ -59,4 +59,4 @@ const VerifiedEmailPage = () => {
 	)
 }
 
-export { VerifiedEmailPage }
+export default VerifiedEmailPage

@@ -49,4 +49,4 @@ const QrScan = () => {
 	)
 }
 
-export { QrScan }
+export default QrScan

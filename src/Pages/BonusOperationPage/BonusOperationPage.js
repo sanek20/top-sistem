@@ -103,4 +103,4 @@ const BonusOperationPage = () => {
 	)
 }
 
-export { BonusOperationPage }
+export default BonusOperationPage

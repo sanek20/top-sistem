@@ -1,9 +1,9 @@
 const { injectManifest } = require('workbox-build')
 
 let workboxConfig = {
-	swSrc: 'src/sw-workbox.js',
-	swDest: 'public/sw-workbox.js',
-	globDirectory: 'public',
+	swSrc: 'src/sw-workbox-template.js',
+	swDest: 'build/sw-workbox.js',
+	globDirectory: 'build',
 	globPatterns: [
 		'icon-192x192.png',
 		'icon-256x256.png',

@@ -33,7 +33,7 @@ export const useAuthPage = () => {
 		if (authFormat) {
 			return (
 				<>
-					<Link to='/'>Забыли пароль</Link> или{' '}
+					<Link to='/reset-pass'>Забыли пароль</Link> или{' '}
 					<button onClick={() => setAuthFormat(false)}>
 						зарегистрироваться
 					</button>

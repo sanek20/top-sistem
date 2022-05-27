@@ -19,4 +19,4 @@ const PollsMainPage = () => {
 	)
 }
 
-export { PollsMainPage }
+export default PollsMainPage

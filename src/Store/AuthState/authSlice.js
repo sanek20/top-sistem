@@ -74,7 +74,7 @@ const authSlice = createSlice({
 		[autoSign.rejected]: (state, action) => {
 			state.auth = false
 			state.error = true
-			state.errorMessage = action.payload
+			state.errorMessage = action.payload?.message
 			state.loading = false
 		},
 		[register.pending]: (state) => {

@@ -136,7 +136,7 @@ const ProfileForm = () => {
 			<button onClick={() => dispatch(signOut())} className={cls.signOutBtn}>
 				Выйти
 			</button>
-			<p style={{ margin: '0 auto', display: 'block' }}>Build 1.8</p>
+			<p style={{ margin: '0 auto', display: 'block' }}>Build 1.8.4 PWA</p>
 		</div>
 	)
 }

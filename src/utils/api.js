@@ -105,10 +105,32 @@ class Api {
 			.get(`${this._baseUrl}/users/${userId}?shopping_center_id=${centerId}`)
 			.then(onResponse)
 	}
+
+	sendEmailToResetPassword(email) {
+		return axios
+			.post(`${this._baseUrl}/users/reset_password?email=${email}`)
+			.then(onResponse)
+	}
+
+	checkResetPasswordCode(email, code) {
+		return axios
+			.get(
+				`${this._baseUrl}/users/verify_password_reset?email=${email}&code=${code}`
+			)
+			.then(onResponse)
+	}
+
+	setNewPassword(email, code, newPassword) {
+		return axios
+			.post(
+				`${this._baseUrl}/users/update_password?email=${email}&code=${code}&new_password=${newPassword}`
+			)
+			.then(onResponse)
+	}
 }
 
 const config = {
-	baseUrl: 'https://top-sistem.ru/api'
+	baseUrl: 'https://api.top-sistem.ru/api'
 }
 
 const api = new Api(config)

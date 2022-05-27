@@ -61,7 +61,7 @@ export const autoSign = createAsyncThunk(
 				throw new SyntaxError('Have not password and email')
 			}
 		} catch (e) {
-			return rejectWithValue(e)
+			return rejectWithValue(e.message)
 		}
 	}
 )

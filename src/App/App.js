@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import { ScrollToTop } from '../Components/ScrollToTop'
+import { Loader } from '../Components/UI/Loader'
 import { ModalState } from '../Context/ModalContext/ModalState'
 import { MainLayout } from '../Layouts/MainLayout/MainLayout'
 import { autoSign } from '../Store/AuthState/authServices'
@@ -19,8 +20,6 @@ function App() {
 		Promise.race([dispatch(autoSign()), dispatch(getShoppingCenters())]).then(
 			() => {}
 		)
-		// dispatch(autoSign())
-		// dispatch(getShoppingCenters())
 	}, [])
 
 	return (
@@ -28,18 +27,20 @@ function App() {
 			<MainLayout>
 				<BrowserRouter>
 					<ScrollToTop />
-					<Routes>
-						{routes.map(({ path, Component }) => {
-							return (
-								<Route
-									key={path}
-									path={path}
-									exact={path === '/'}
-									element={<Component />}
-								/>
-							)
-						})}
-					</Routes>
+					<React.Suspense fallback={<Loader transparent={false} />}>
+						<Routes>
+							{routes.map(({ path, Component }) => {
+								return (
+									<Route
+										key={path}
+										path={path}
+										exact={path === '/'}
+										element={<Component />}
+									/>
+								)
+							})}
+						</Routes>
+					</React.Suspense>
 				</BrowserRouter>
 			</MainLayout>
 		</ModalState>

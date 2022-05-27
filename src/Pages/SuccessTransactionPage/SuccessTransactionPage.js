@@ -36,4 +36,4 @@ const SuccessTransactionPage = () => {
 	)
 }
 
-export { SuccessTransactionPage }
+export default SuccessTransactionPage

@@ -68,4 +68,4 @@ const CatalogItemPage = () => {
 	}
 }
 
-export { CatalogItemPage }
+export default CatalogItemPage

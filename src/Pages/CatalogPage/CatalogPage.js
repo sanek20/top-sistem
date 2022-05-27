@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 
 import { FooterPanel } from '../../Components/FooterPanel'
@@ -16,7 +16,6 @@ const CatalogPage = () => {
 	const { loading, centers, cities, error, errMessage } = useSelector(
 		(state) => state.shoppingCenters
 	)
-	const dispatch = useDispatch()
 
 	if (!auth) {
 		return <Navigate to='/auth' replace />
@@ -42,4 +41,4 @@ const CatalogPage = () => {
 	)
 }
 
-export { CatalogPage }
+export default CatalogPage

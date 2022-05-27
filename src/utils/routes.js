@@ -1,16 +1,28 @@
-import { AuthPage } from '../Pages/AuthPage'
-import { BonusOperationPage } from '../Pages/BonusOperationPage'
-import { CatalogItemPage } from '../Pages/CatalogItemPage'
-import { CatalogPage } from '../Pages/CatalogPage'
-import { MainPage } from '../Pages/MainPage'
-import { PollItemPage } from '../Pages/PollItemPage/PollItemPage'
-import { PollsPageSC } from '../Pages/PollPageSC/PollsPageSC'
-import { PollsMainPage } from '../Pages/PollsMainPage/PollsMainPage'
-import { ProfilePage } from '../Pages/ProfilePage'
-import { QrScan } from '../Pages/QrScan'
-import { SuccessTransactionPage } from '../Pages/SuccessTransactionPage/SuccessTransactionPage'
-import { VerifiedEmailPage } from '../Pages/VerifiedEmailPage'
+import React, { lazy } from 'react'
 
+import { AuthPage } from '../Pages/AuthPage'
+import MainPage from '../Pages/MainPage/MainPage'
+
+
+const BonusOperationPage = lazy(() =>
+	import('../Pages/BonusOperationPage/BonusOperationPage')
+)
+const CatalogItemPage = lazy(() =>
+	import('../Pages/CatalogItemPage/CatalogItemPage')
+)
+const PollItemPage = lazy(() => import('../Pages/PollItemPage/PollItemPage'))
+const PollsPageSC = lazy(() => import('../Pages/PollPageSC/PollsPageSC'))
+const PollsMainPage = lazy(() => import('../Pages/PollsMainPage/PollsMainPage'))
+const ProfilePage = lazy(() => import('../Pages/ProfilePage/ProfilePage'))
+const QrScan = lazy(() => import('../Pages/QrScan/QrScan'))
+const CatalogPage = lazy(() => import('../Pages/CatalogPage/CatalogPage'))
+const VerifiedEmailPage = lazy(() =>
+	import('../Pages/VerifiedEmailPage/VerifiedEmailPage')
+)
+const SuccessTransactionPage = lazy(() =>
+	import('../Pages/SuccessTransactionPage/SuccessTransactionPage')
+)
+const ResetPassword = lazy(() => import('../Pages/ReserPassword/ResetPassword'))
 
 export const routes = [
 	{ path: '/', name: 'Main', authenticated: true, Component: MainPage },
@@ -74,5 +86,11 @@ export const routes = [
 		name: 'PollsMainPage',
 		authenticated: true,
 		Component: PollsMainPage
+	},
+	{
+		path: '/reset-pass',
+		name: 'ResetPassword',
+		authenticated: true,
+		Component: ResetPassword
 	}
 ]

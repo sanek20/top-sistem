@@ -172,3 +172,15 @@ select {
 	box-shadow: 0 0 5px #e5465c;
 	outline: none;
 }
+
+.acceptCodeInput {
+	display: block;
+	width: 80%;
+	height: 58px;
+	margin: 0 auto;
+	padding: 0 10px;
+	text-align: center;
+	font-size: 30px;
+	font-family: 'Fira Code', Consolas, Menlo, 'Courier New', monospace;
+	letter-spacing: 8px;
+}

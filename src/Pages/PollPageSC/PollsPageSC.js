@@ -52,4 +52,4 @@ const PollsPageSC = () => {
 	)
 }
 
-export { PollsPageSC }
+export default PollsPageSC

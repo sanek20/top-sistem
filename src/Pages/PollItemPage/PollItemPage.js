@@ -74,4 +74,4 @@ const PollItemPage = () => {
 	)
 }
 
-export { PollItemPage }
+export default PollItemPage
